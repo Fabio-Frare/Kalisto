@@ -6,7 +6,7 @@ public class MovimentarPersonagem : MonoBehaviour
 {
     public CharacterController controle;
     public float velocidade = 6f;
-    public float alturaPulo = 1f;
+    public float alturaPulo = 1.5f;
     public float gravidade = -40f;
  
     public Transform checaChao;
