@@ -10,7 +10,7 @@ public class MovimentarPersonagem : MonoBehaviour
     public float gravidade = -40f;
  
     public Transform checaChao;
-    public float raioEsfera = 0.4f;
+    public float raioEsfera = 0.9f;
     public LayerMask chaoMask;
     public bool estaNoChao;
 
