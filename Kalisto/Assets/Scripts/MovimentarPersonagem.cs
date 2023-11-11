@@ -23,6 +23,8 @@ public class MovimentarPersonagem : MonoBehaviour
 
     void Update()
     {
+        // cria uma esfera de raioesfera na posição checaChao, batendo com a mascara no chão
+        // se estah em contato com chaoMask, então retorna true.        
         estaNoChao = Physics.CheckSphere(checaChao.position, raioEsfera, chaoMask);
 
         float x = Input.GetAxis("Horizontal");       
@@ -32,6 +34,7 @@ public class MovimentarPersonagem : MonoBehaviour
 
         controle.Move(mover * velocidade * Time.deltaTime);    
 
+        /*
         if (estaNoChao && Input.GetButtonDown("Jump"))
         {
             velocidadeCai.y = Mathf.Sqrt(alturaPulo * -2f * gravidade);
@@ -42,10 +45,10 @@ public class MovimentarPersonagem : MonoBehaviour
             velocidadeCai.y += gravidade * Time.deltaTime;
         }
 
-        controle.Move(velocidadeCai * Time.deltaTime);
+        controle.Move(velocidadeCai * Time.deltaTime);*/
     }
 
-    void OnDrawGizmosSelected()
+   void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawSphere(checaChao.position, raioEsfera);
