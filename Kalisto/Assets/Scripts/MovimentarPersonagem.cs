@@ -7,7 +7,7 @@ public class MovimentarPersonagem : MonoBehaviour
     public CharacterController controle;
     private Animator anim;
 
-    public float velocidade = 3f;
+    public float velocidade = 2f;
     public float alturaPulo = 1.5f;
     public float gravidade = -40f;
  
@@ -26,11 +26,11 @@ public class MovimentarPersonagem : MonoBehaviour
     }
 
     void Update()
-    {        
-        movimentoPersonagem();  
+    {
+        acoesPersonagem();
     }
-
-    void movimentoPersonagem()
+    
+    void acoesPersonagem()
     {
         // cria uma esfera de raioesfera na posição checaChao, batendo com a mascara no chão
         // se estah em contato com chaoMask, então retorna true.        
@@ -40,9 +40,11 @@ public class MovimentarPersonagem : MonoBehaviour
         float z = Input.GetAxis("Vertical");
 
         Vector3 mover = transform.right * x + transform.forward * z;
-        //anim.SetInteger("transition", 0);
 
-        //controle.Move(mover * velocidade * Time.deltaTime);   
+        // Direciona o olhar do personagem para a direção do movimento e suaviza a mudança.
+        transform.forward = Vector3.Slerp(transform.forward , mover, Time.deltaTime * 2);
+
+ 
         if(mover == Vector3.zero)
         {
             parado = true;
@@ -58,17 +60,17 @@ public class MovimentarPersonagem : MonoBehaviour
        
         if (!parado)
         {   
-            controle.Move(mover * velocidade * Time.deltaTime); 
+            controle.Move(mover * velocidade * Time.deltaTime);            
 
             // Enquanto Shift estiver pressionado, aumenta a velocidade simulando uma corrida.
             if (estaNoChao && Input.GetKey(KeyCode.LeftShift))
-            {
-                velocidade = 6f;
+            {   
                 anim.SetInteger("transition", 2);
+                velocidade = 6f;
             } else
             {   
-                velocidade = 3f;
                 anim.SetInteger("transition", 1); 
+                velocidade = 2f;
             } 
         }    
 
